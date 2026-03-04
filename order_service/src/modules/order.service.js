@@ -12,7 +12,8 @@ const createOrder = async (data) => {
     amount: data.amount,
   });
 
-  await publishOrderCreated(newOrder);
+const publishedOrder = await publishOrderCreated(newOrder);
+console.log("Kafka event sent for order:", newOrder.orderId);
 
   return newOrder;
 };
