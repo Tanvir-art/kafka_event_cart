@@ -1,5 +1,15 @@
-const logger = (message) => {
-  console.log(`[Order-Service] ${message}`);
-};
+const winston = require("winston");
+
+const logger = winston.createLogger({
+  level: "info",
+  format: winston.format.combine(
+    winston.format.colorize(),
+    winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+    winston.format.printf(({ timestamp, level, message }) => {
+      return `[order-service] ${timestamp} ${level}: ${message}`;
+    })
+  ),
+  transports: [new winston.transports.Console()],
+});
 
 module.exports = logger;

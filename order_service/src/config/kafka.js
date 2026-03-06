@@ -1,6 +1,5 @@
 const { Kafka } = require("kafkajs");
-
-console.log("Kafka Broker:", process.env.KAFKA_BROKER)
+const logger = require("../utils/logger");
 
 const kafka = new Kafka({
   clientId: "order-service",
@@ -11,8 +10,7 @@ const producer = kafka.producer();
 
 const connectProducer = async () => {
   await producer.connect();
-  console.log(" Kafka Producer Connected");
+  logger.info("Kafka producer connected");
 };
 
 module.exports = { producer, connectProducer };
-

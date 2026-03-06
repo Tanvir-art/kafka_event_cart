@@ -6,10 +6,12 @@ const logger = winston.createLogger({
     winston.format.colorize(),
     winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
     winston.format.printf(({ timestamp, level, message }) => {
-      return `[payment-service] ${timestamp} ${level}: ${message}`;
+      return `[log-service] ${timestamp} ${level}: ${message}`;
     })
   ),
-  transports: [new winston.transports.Console()],
+  transports: [
+    new winston.transports.Console(),
+  ],
 });
 
 module.exports = logger;

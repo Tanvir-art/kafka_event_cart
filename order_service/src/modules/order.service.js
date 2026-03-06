@@ -1,6 +1,7 @@
 const { v4: uuidv4 } = require("uuid");
 const Order = require("./order.model");
 const { publishOrderCreated } = require("../producer/order.producer");
+const logger = require("../utils/logger");
 
 const createOrder = async (data) => {
   const orderId = uuidv4();
@@ -12,8 +13,8 @@ const createOrder = async (data) => {
     amount: data.amount,
   });
 
-const publishedOrder = await publishOrderCreated(newOrder);
-console.log("Kafka event sent for order:", newOrder.orderId);
+  await publishOrderCreated(newOrder);
+  logger.info(`Kafka event sent for order ${newOrder.orderId}`);
 
   return newOrder;
 };

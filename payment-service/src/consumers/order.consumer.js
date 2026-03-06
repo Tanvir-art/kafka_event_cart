@@ -1,5 +1,6 @@
 const { consumer, connectConsumer } = require("../config/kafka");
 const { processPayment } = require("../modules/payment.service");
+const logger = require("../utils/logger");
 
 const startConsumer = async () => {
   await connectConsumer();
@@ -9,10 +10,10 @@ const startConsumer = async () => {
   await consumer.run({
     eachMessage: async ({ message }) => {
       const order = JSON.parse(message.value.toString());
-      console.log(" Received Order:", order);
+      logger.info(`Order received for payment: ${order.orderId}`);
 
       await processPayment(order);
-      console.log(" Payment processed for Order:", order.orderId);
+      logger.info(`Payment processed for order ${order.orderId}`);
     },
   });
 };

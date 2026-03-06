@@ -1,23 +1,22 @@
 require("dotenv").config();
+
 const app = require("./app");
 const connectDB = require("./config/db");
-const { startConsumer } = require("./consumers/order.consumer");
-const { connectProducer } = require("./config/kafka");
+const startConsumer = require("./consumer/global.consumers");
 const logger = require("./utils/logger");
 
-const PORT = process.env.PORT || 5002;
+const PORT = process.env.PORT || 5005;
 
 const startServer = async () => {
   try {
     await connectDB();
-    await connectProducer();
     await startConsumer();
 
     app.listen(PORT, () => {
-      logger.info(`Payment service running on port ${PORT}`);
+      logger.info(`Log service running on port ${PORT}`);
     });
   } catch (error) {
-    logger.error(`Payment service startup failed: ${error.message}`);
+    logger.error(`Log service startup failed: ${error.message}`);
     process.exit(1);
   }
 };

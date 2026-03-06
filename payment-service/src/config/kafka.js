@@ -1,4 +1,5 @@
 const { Kafka } = require("kafkajs");
+const logger = require("../utils/logger");
 
 const kafka = new Kafka({
   clientId: "payment-service",
@@ -10,12 +11,12 @@ const consumer = kafka.consumer({ groupId: "payment-group" });
 
 const connectProducer = async () => {
   await producer.connect();
-  console.log("Kafka Producer Connected");
+  logger.info("Kafka producer connected");
 };
 
 const connectConsumer = async () => {
   await consumer.connect();
-  console.log("Kafka Consumer Connected");
+  logger.info("Kafka consumer connected");
 };
 
 module.exports = { producer, consumer, connectProducer, connectConsumer };
