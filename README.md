@@ -167,15 +167,6 @@ Expected behavior:
 - Central event observability via log-service topic fan-in
 - Designed to be extended toward saga/outbox/retry patterns
 
-## Portfolio Positioning
-
-This project is intentionally structured to showcase senior backend competencies for remote roles:
-
-- Service decomposition and contract-based communication
-- Reliability-oriented middleware and gateway controls
-- Async architecture with audit-ready event history
-- Practical dev ergonomics using Dockerized infrastructure
-
 ## Next Improvements
 
 - Add health/readiness endpoints for each service
